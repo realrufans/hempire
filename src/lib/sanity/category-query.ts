@@ -6,7 +6,8 @@ export async function getCategories() {
     groq`*[_type == "category"] {
       _id,
       name,
-      desc,
+      description,
+      cover_image,
       
     }`
   );

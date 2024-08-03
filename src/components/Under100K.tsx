@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { CategoryType } from "@/lib/sanity/types";
+import { CategoryType, ProductType } from "@/lib/sanity/types";
 import { getCategories } from "@/lib/sanity/category-query";
 import imageUrlBuilder from "@sanity/image-url";
 import { urlFor } from "@/lib/sanity/urlBulder";
 
 interface categoryArr {
-  categories: CategoryType[];
+  under100k: ProductType[];
 }
 
-const ProductsCategory = ({ categories }: categoryArr) => {
+const Under100K = ({ under100k }: categoryArr) => {
+  const [viewMore, setViewMore] = useState(false);
   return (
     <section id="latest-products " className="py-10 bg-white">
       <div className="container  mx-auto px-4">
         <h2 className="text-3xl  font-bold mb-8 text-gray-800">
-          Shop by Category
+          Everything under #100,000
         </h2>
         <div className="flex flex-wrap -mx-4">
-          {categories.map((category, i) => {
-            console.log(category.cover_image, "beans");
+          {under100k.map((category, i) => {
             return (
-              <div key={i} className="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+              <div
+                key={i}
+                className={`w-full sm:w-1/2 lg:w-1/4 px-4 mb-8 ${!viewMore && i > 3 && "hidden"}`}
+              >
                 <div className="bg-white p-3 rounded-lg shadow-lg">
                   <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
                     <Image
@@ -51,9 +54,17 @@ const ProductsCategory = ({ categories }: categoryArr) => {
             );
           })}
         </div>
+
+        <button
+          onClick={() => setViewMore(!viewMore)}
+          className={`border-2 
+              max-w-md  mx-auto  hover:transition-all  flex justify-center hover:translate-x-2   max-md:w-40 duration-1000 border-[#ff8c00] text-[#ff8c00] font-semibold py-2 px-4 rounded-full w-full ${(!under100k.length || under100k.length < 4) && "hidden"} `}
+        >
+          {viewMore ? "View less" : "View more"}
+        </button>
       </div>
     </section>
   );
 };
 
-export default ProductsCategory;
+export default Under100K;

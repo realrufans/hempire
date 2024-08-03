@@ -1,19 +1,32 @@
 export type ProductType = {
   _id: string;
   name: string;
-  productImage: {
+  cover_image: {
+    alt: string;
+    asset: {
+      _ref: string;
+    };
+  };
+  images: {
     alt: string;
     imageUrl: string;
-  };
-  slu: string;
-  categoryName: string;
+  }[];
+  slug: string;
+  category: string;
   description: string;
   price: number;
+  original_price: number;
+  tags: string[];
 };
 
 export type CategoryType = {
   _id: string;
   name: string;
-  desc: string;
- 
+  description: string;
+  cover_image: {
+    alt: string;
+    asset: {
+      _ref: string;
+    };
+  };
 };

@@ -7,8 +7,13 @@ import LatestProducts from "@/components/LatestProducts";
 import ProductsCategory from "@/components/ProductsCategory";
 
 import ProductSlider from "@/components/ProductSlider";
+import Under100K from "@/components/Under100K";
 import { getCategories } from "@/lib/sanity/category-query";
-import { getProducts, getSelectedProducts } from "@/lib/sanity/product-query";
+import {
+  getProducts,
+  getSelectedProducts,
+  getUnder100kProducts,
+} from "@/lib/sanity/product-query";
 import { CategoryType, ProductType } from "@/lib/sanity/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -17,7 +22,7 @@ export default function Home() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-
+  const [under100k, setUnder100k] = useState<ProductType[]>([]);
   const [cartItems, setCartItems] = useState<ProductType[]>([]);
   const [cartItemsCount, setCartItemsCount] = useState<number>(0);
 
@@ -36,7 +41,17 @@ export default function Home() {
   useEffect(() => {
     async function fetchProducts() {
       const allProducts: ProductType[] = await getProducts();
+
       setProducts(allProducts);
+    }
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const allUnder100k: ProductType[] = await getUnder100kProducts();
+      console.log(allUnder100k, "heheheh");
+      setUnder100k(allUnder100k);
     }
     fetchProducts();
   }, []);
@@ -44,7 +59,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchCategories() {
       const allCategories: CategoryType[] = await getCategories();
-      console.log("fetched all categories", allCategories);
+
       setCategories(allCategories.reverse());
     }
     fetchCategories();
@@ -101,8 +116,9 @@ export default function Home() {
     <div>
       <Header />
       <DemoSlider />
-      <LatestProducts />
+      <LatestProducts products={products} />
       <ProductsCategory categories={categories} />
+      <Under100K under100k={under100k} />
 
       <Footer />
     </div>
