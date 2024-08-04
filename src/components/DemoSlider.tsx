@@ -28,6 +28,11 @@ interface ButtonProps {
   link: string;
   type: string;
 }
+type MyFunctionType = (arg: string) => void;
+interface MyComponentProps {
+  addCartItem: MyFunctionType;
+  // other props
+}
 
 const DemoSlider = () => {
   return (
@@ -45,10 +50,12 @@ const DemoSlider = () => {
         <h1 className="text-center text-[32px] leading-[38px] font-bold  py-2    bg-transparent/50 rounded-full border-2 border-white/50 px-5 tracking-tighter sm:text-[77px] sm:leading-[79px] md:text-left text-white">
           Luxury Look At It&apos;s Peak
         </h1>
-        <Link href="/products" target="_blank" prefetch={false}>
-          <button className="py-[10px] text-[21px] md:py-[14px] md:text-[23px] bg-[#ff8a00] font-bold text-white  hover:border-2 hover:bg-transparent px-5  rounded-lg">
-            Shop Now!
-          </button>
+
+        <Link
+          href={"#"}
+          className="py-[10px] text-[21px] md:py-[14px] md:text-[23px] bg-[#ff8a00] font-bold text-white  hover:border-2 hover:bg-transparent px-5  rounded-lg"
+        >
+          Shop Now!
         </Link>
       </div>
     </div>

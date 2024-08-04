@@ -23,7 +23,7 @@ const ProductsCategory = ({ categories }: categoryArr) => {
             return (
               <div key={i} className="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
                 <div className="bg-white p-3 rounded-lg shadow-lg">
-                  <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
+                  <div className="relative hover:blur-sm w-full h-64 mb-4 rounded-lg overflow-hidden">
                     <Image
                       src={urlFor(category.cover_image.asset._ref).url()}
                       alt={"title"}

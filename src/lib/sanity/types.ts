@@ -30,3 +30,6 @@ export type CategoryType = {
     };
   };
 };
+export type CartProductType = ProductType & {
+  quantity: number;
+};

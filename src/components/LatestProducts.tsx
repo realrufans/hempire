@@ -8,12 +8,14 @@ import Image from "next/image";
 import { ProductType } from "@/lib/sanity/types";
 import { urlFor } from "@/lib/sanity/urlBulder";
 
-interface productsType {
+type addCartItem = (arg: ProductType) => void;
+
+interface props {
   products: ProductType[];
+  addCartItem: addCartItem;
 }
 
-const LatestProducts = ({ products }: productsType) => {
-  console.log(products, "inside");
+const LatestProducts = ({ products, addCartItem }: props) => {
   return (
     <section id="latest-products" className="py-10 bg-white">
       <div className="container mx-auto px-4">
@@ -38,53 +40,47 @@ const LatestProducts = ({ products }: productsType) => {
             },
           }}
         >
-          {products.map(
-            ({
-              _id,
-              cover_image,
-              name,
-              description,
-              price,
-              original_price,
-            }) => (
-              <SwiperSlide key={_id}>
-                <div className="bg-white p-3 flex flex-col rounded-lg shadow-lg">
-                  <div className="relative hover:blur-sm w-full h-64 mb-4 rounded-lg overflow-hidden">
-                    <Image
-                      src={urlFor(cover_image.asset._ref).url()}
-                      alt={cover_image.alt}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-lg"
-                    />
-                  </div>
-
-                  <div className="">
-                    <a
-                      href="#"
-                      className="text-lg font-semibold text-gray-800 mb-2"
-                    >
-                      {name}
-                    </a>
-                    <p className="my-2 max-sm:text-sm line-clamp-2 text-gray-950">
-                      {description}
-                    </p>
-                    <div className="flex items-center mb-4">
-                      <span className="text-lg font-bold text-gray-800">
-                        {price}
-                      </span>
-                      <span className="text-sm line-through text-gray-800 ml-2">
-                        {original_price && original_price}
-                      </span>
-                    </div>
-                    <button className="bg-[#ff8c00] border hover:text-[#ff8c00] border-transparent hover:bg-transparent hover:border-[#ff8c00] text-white hover:bg-[#ff8c00] font-semibold py-2 px-4 rounded-full">
-                      Add to Cart
-                    </button>
-                  </div>
+          {products.map((product, index) => (
+            <SwiperSlide key={product._id}>
+              <div className="bg-white p-3 flex flex-col rounded-lg shadow-lg">
+                <div className="relative hover:blur-sm w-full h-64 mb-4 rounded-lg overflow-hidden">
+                  <Image
+                    src={urlFor(product.cover_image.asset._ref).url()}
+                    alt={product.cover_image.alt}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-lg"
+                  />
                 </div>
-              </SwiperSlide>
-            )
-          )}
+
+                <div className="">
+                  <a
+                    href="#"
+                    className="text-lg font-semibold text-gray-800 mb-2"
+                  >
+                    {product.name}
+                  </a>
+                  <p className="my-2 max-sm:text-sm line-clamp-2 text-gray-950">
+                    {product.description}
+                  </p>
+                  <div className="flex items-center mb-4">
+                    <span className="text-lg font-bold text-gray-800">
+                      ₦{product.price}
+                    </span>
+                    <span className="text-sm line-through text-gray-800 ml-2">
+                      ₦{product.original_price && product.original_price}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => addCartItem(product)}
+                    className="bg-[#ff8c00] border hover:text-[#ff8c00] border-transparent hover:bg-transparent hover:border-[#ff8c00] text-white hover:bg-[#ff8c00] font-semibold py-2 px-4 rounded-full"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </section>

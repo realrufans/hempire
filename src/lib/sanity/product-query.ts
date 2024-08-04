@@ -13,7 +13,7 @@ export async function getProducts() {
       cover_image,
       images,
       tags,
-      slug ,
+    "slug": slug.current,
       category
     }`
   );
@@ -30,7 +30,7 @@ export async function getUnder100kProducts() {
       cover_image,
       images,
       tags,
-      slug,
+ "slug": slug.current,
       category
     }`
   );

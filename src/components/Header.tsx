@@ -2,9 +2,12 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CiShoppingCart } from "react-icons/ci";
+import { ToastContainer } from "react-toastify";
 
-
-const Header = () => {
+interface counter {
+  itemCount: number;
+}
+const Header = ({ itemCount }: counter) => {
   const [isMenOpen, setIsMenOpen] = useState(false);
   const [isWomenOpen, setIsWomenOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -14,8 +17,11 @@ const Header = () => {
     <header className="bg-gray-900 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center py-4">
         {/* Left section: Logo */}
-        <Link className="flex items-center text-[#ff8c00] font-bold text-2xl" href="/">
-        <h1>H-Empire</h1>
+        <Link
+          className="flex items-center text-[#ff8c00] font-bold text-2xl"
+          href="/"
+        >
+          <h1>HarnahEmpire</h1>
         </Link>
 
         {/* Hamburger menu (for mobile) */}
@@ -192,7 +198,11 @@ const Header = () => {
                 height={24}
                 className="h-6 w-6 group-hover:scale-120"
               />
+              <p className="absolute  left-2 -top-5 text-[#ff8c00] font-extrabold z-50">
+                {itemCount}
+              </p>
             </Link>
+
             {/* Cart dropdown */}
             <div
               className={`absolute right-0 mt-1 w-80 bg-white shadow-lg p-4 rounded ${
@@ -273,6 +283,7 @@ const Header = () => {
           )}
         </div>
       </div>
+ 
     </header>
   );
 };
