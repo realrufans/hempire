@@ -16,6 +16,7 @@ import { urlFor } from "@/lib/sanity/urlBulder";
 import Header from "@/components/Header";
 import { formatBalance } from "@/lib/numberShortener";
 import { currencyFormater } from "@/lib/currencyFormater";
+import Script from "next/script";
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartProductType[]>([]);
@@ -88,6 +89,37 @@ export default function CartPage() {
       updatedCartItems
     );
   };
+
+  // Declare the function outside the block
+  function makePayment() {
+    window.FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-02b9b5fc6406bd4a41c3ff141cc45e93-X",
+      tx_ref: "txref-DI0NzMx13",
+      amount: 2500,
+      currency: "NGN",
+      payment_options: "card, banktransfer, ussd",
+      meta: {
+        source: "docs-inline-test",
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: "test@mailinator.com",
+        phone_number: "08100000000",
+        name: "Ayomide Jimi-Oni",
+      },
+      customizations: {
+        title: "Flutterwave Developers",
+        description: "Test Payment",
+        logo: "https://checkout.flutterwave.com/assets/img/rave-logo.png",
+      },
+      callback: function (data: any) {
+        console.log("payment callback:", data);
+      },
+      onclose: function () {
+        console.log("Payment cancelled!");
+      },
+    });
+  }
 
   return (
     <div className="flex flex-col min-h-screen  bg-white text-gray-900 ">
@@ -170,11 +202,17 @@ export default function CartPage() {
           Total: ₦{currencyFormater(totalCost.toFixed(2))}
         </div>
         <button
+          onClick={makePayment}
           disabled={cartItems.length <= 0}
           className={`w-full md:w-auto  bg-[#ff8c00] text-white hover:bg-[#ff9c00]  px-4 py-2 rounded-lg shadow-md ${cartItems.length <= 0 && "cursor-not-allowed bg-gray-500 hover:bg-gray-500"}`}
         >
           Proceed to Checkout
         </button>
+
+        <Script
+          src="https://checkout.flutterwave.com/v3.js"
+          strategy="beforeInteractive"
+        />
       </div>
     </div>
   );
