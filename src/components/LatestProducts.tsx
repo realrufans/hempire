@@ -56,7 +56,7 @@ const LatestProducts = ({ products, addCartItem }: props) => {
                 <div className="">
                   <a
                     href="#"
-                    className="text-lg font-semibold text-gray-800 mb-2"
+                    className="text-lg line-clamp-1 font-semibold text-gray-800 mb-2"
                   >
                     {product.name}
                   </a>

@@ -54,7 +54,7 @@ const Under100K = ({ under100k }: categoryArr) => {
                     </span>
                   </div>
                   <button className="bg-[#ff8c00] max-md:w-fit max-md:text-xs border border-transparent hover:bg-transparent hover:border-[#ff8c00] text-white hover:text-[#ff8c00] font-semibold py-2  px-4 rounded-full w-full">
-                    View Collection
+                    Add to Cart
                   </button>
                 </div>
               </div>

@@ -19,8 +19,7 @@ const ProductsCategory = ({ categories }: categoryArr) => {
         </h2>
         <div className="flex flex-wrap -mx-4">
           {categories.map((category, i) => {
-            console.log(category.cover_image, "beans");
-            return (
+             return (
               <div key={i} className="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
                 <div className="bg-white p-3 rounded-lg shadow-lg">
                   <div className="relative hover:blur-sm w-full h-64 mb-4 rounded-lg overflow-hidden">

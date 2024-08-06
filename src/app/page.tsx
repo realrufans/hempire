@@ -90,7 +90,7 @@ export default function Home() {
         // Product already exists in the cart, update quantity
         newCartItems = [...cartItems];
         newCartItems[existingProductIndex].quantity += 1;
-        newCount = cartItemsCount; // Keep count the same as it reflects the number of items
+              newCount = cartItemsCount + 1;
 
         // Alternatively, if you want to update count based on the total items, uncomment the next line
         // newCount = cartItemsCount + 1;
