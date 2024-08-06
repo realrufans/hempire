@@ -47,7 +47,7 @@ const DemoSlider = () => {
         className="absolute inset-0 opacity-80"
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-8 px-4 py-20  bg-opacity-40">
-        <h1 className="text-center text-[32px] leading-[38px] font-bold  py-2    bg-transparent/50 rounded-full border-2 border-white/50 px-5 tracking-tighter sm:text-[77px] sm:leading-[79px] md:text-left text-white">
+        <h1 className="text-center text-[32px] leading-[38px] font-bold  py-2    bg-transparent/50 rounded-full border-2 border-white/50 px-5 tracking-tighter lg:text-[77px] sm:leading-[79px] md:text-left text-white">
           Luxury Look At It&apos;s Peak
         </h1>
 

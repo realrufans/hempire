@@ -128,7 +128,7 @@ export default function Home() {
       <DemoSlider />
       <LatestProducts addCartItem={addCartItem} products={products} />
       <ProductsCategory categories={categories} />
-      <Under100K under100k={under100k} />
+      <Under100K addCartItem={addCartItem} under100k={under100k} />
       <Footer />
     </div>
   );

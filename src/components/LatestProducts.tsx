@@ -17,7 +17,7 @@ interface props {
 
 const LatestProducts = ({ products, addCartItem }: props) => {
   return (
-    <section id="latest-products" className="py-10 bg-white">
+    <section id="latest-products" className="py-10 bg-white ">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-gray-800">
           Latest products
@@ -41,8 +41,8 @@ const LatestProducts = ({ products, addCartItem }: props) => {
           }}
         >
           {products.map((product, index) => (
-            <SwiperSlide key={product._id}>
-              <div className="bg-white p-3 flex flex-col rounded-lg shadow-lg">
+            <SwiperSlide key={product._id} className="border-2">
+              <div className="bg-white p-3 flex flex-col rounded-lg   shadow-lg">
                 <div className="relative hover:blur-sm w-full h-64 mb-4 rounded-lg overflow-hidden">
                   <Image
                     src={urlFor(product.cover_image.asset._ref).url()}

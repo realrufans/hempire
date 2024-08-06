@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CiShoppingCart } from "react-icons/ci";
 import { ToastContainer } from "react-toastify";
+import { MdClose, MdMenu } from "react-icons/md";
 
 interface counter {
   itemCount: number;
@@ -12,23 +13,47 @@ const Header = ({ itemCount }: counter) => {
   const [isWomenOpen, setIsWomenOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
-    <header className="bg-gray-900 sticky top-0 z-50">
+    <header className=" relative bg-gray-900 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center py-4">
         {/* Left section: Logo */}
         <Link
           className="flex items-center text-[#ff8c00] font-bold text-2xl"
           href="/"
         >
-          <h1>HarnahEmpire</h1>
+          <h1>H.Empire</h1>
         </Link>
 
         {/* Hamburger menu (for mobile) */}
-        <div className="flex lg:hidden">
-          <button id="hamburger" className="text-white focus:outline-none">
+        <div className="flex p-2 space-x-2 items-center sm:hidden">
+          <div className="relative group cart-wrapper">
+            <Link href="/cart">
+              <Image
+                src="/assets/images/cart-shopping.svg"
+                alt="Cart"
+                width={24}
+                height={24}
+                className="h-8 w-8 group-hover:scale-120"
+              />
+              <p className="absolute  left-2 -top-5 text-[#ff8c00] font-extrabold z-50">
+                {itemCount}
+              </p>
+            </Link>
+          </div>
+
+          <button
+            onClick={toggleMenu}
+            id="hamburger"
+            className="text-white focus:outline-none"
+          >
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -43,140 +68,65 @@ const Header = ({ itemCount }: counter) => {
           </button>
         </div>
 
-        {/* Center section: Menu */}
-        <nav className="hidden lg:flex md:flex-grow justify-center">
-          <ul className="flex justify-center space-x-4 text-white">
-            <li>
-              <Link className="hover:text-secondary font-semibold" href="/">
-                Home
-              </Link>
-            </li>
-
-            {/* Men Dropdown */}
-            <li
-              className="relative group"
-              onMouseEnter={() => setIsMenOpen(true)}
-              onMouseLeave={() => setIsMenOpen(false)}
-            >
+        {menuOpen && (
+          <div className=" sm:hidden   absolute bg-white  h-screen top-16 left-0 right-0  w-full text-gray-900">
+            <nav className="flex flex-col   space-y-8 items-center gap-4 py-4">
               <Link
-                className="hover:text-secondary font-semibold flex items-center"
+                href="/men"
+                className="font-semibold  first-letter:capitalize"
+              >
+                Bone Straight
+              </Link>
+              <Link
+                href="/women"
+                className="font-semibold  first-letter:capitalize"
+              >
+                Body wavy
+              </Link>
+              <Link
                 href="/shop"
+                className="font-semibold  first-letter:capitalize"
               >
-                Men
-                <i
-                  className={`ml-1 text-xs ${
-                    isMenOpen ? "fas fa-chevron-up" : "fas fa-chevron-down"
-                  }`}
-                ></i>
+                Pixie curls
               </Link>
-              {isMenOpen && (
-                <ul className="absolute left-0 bg-white text-black space-y-2 mt-1 p-2 rounded shadow-lg">
-                  <li>
-                    <Link
-                      className="min-w-40 block px-4 py-2 hover:bg-[#ff8c00] hover:text-white rounded"
-                      href="/shop"
-                    >
-                      Men Item 1
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="min-w-40 block px-4 py-2 hover:bg-[#ff8c00] hover:text-white rounded"
-                      href="/shop"
-                    >
-                      Men Item 2
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="min-w-40 block px-4 py-2 hover:bg-[#ff8c00] hover:text-white rounded"
-                      href="/shop"
-                    >
-                      Men Item 3
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            {/* Women Dropdown */}
-            <li
-              className="relative group"
-              onMouseEnter={() => setIsWomenOpen(true)}
-              onMouseLeave={() => setIsWomenOpen(false)}
-            >
               <Link
-                className="hover:text-secondary font-semibold flex items-center"
-                href="/shop"
+                href="/product"
+                className="font-semibold  first-letter:capitalize"
               >
-                Women
-                <i
-                  className={`ml-1 text-xs ${
-                    isWomenOpen ? "fas fa-chevron-up" : "fas fa-chevron-down"
-                  }`}
-                ></i>
+                Factory Wig
               </Link>
-              {isWomenOpen && (
-                <ul className="absolute left-0 bg-white text-black space-y-2 mt-1 p-2 rounded shadow-lg">
-                  <li>
-                    <Link
-                      href="/shop"
-                      className="min-w-40 block px-4 py-2 hover:bg-[#ff8c00] hover:text-white rounded"
-                    >
-                      Women Item 1
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/shop"
-                      className="min-w-40 block px-4 py-2 hover:bg-[#ff8c00] hover:text-white rounded"
-                    >
-                      Women Item 2
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/shop"
-                      className="min-w-40 block px-4 py-2 hover:bg-[#ff8c00] hover:text-white rounded"
-                    >
-                      Women Item 3
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            <li>
-              <Link href="/shop" className="hover:text-secondary font-semibold">
-                Shop
-              </Link>
-            </li>
-            <li>
               <Link
-                href="/single-product-page"
-                className="hover:text-secondary font-semibold"
+                href="/404"
+                className="font-semibold  first-letter:capitalize"
               >
-                Product
+                Under 100k Products
               </Link>
-            </li>
-            <li>
-              <Link href="/404" className="hover:text-secondary font-semibold">
-                404 page
-              </Link>
-            </li>
-            <li>
               <Link
                 href="/checkout"
-                className="hover:text-secondary font-semibold"
+                className="font-semibold  first-letter:capitalize"
               >
                 Checkout
               </Link>
-            </li>
-          </ul>
-        </nav>
+              <div className=" flex justify-between   w-48 mx-2">
+                <Link
+                  href="/register"
+                  className="bg-[#ff8c00] border border-[#ff8c00] hover:bg-transparent text-white hover:text-[#ff8c00] font-semibold px-4 py-2 rounded-full inline-block"
+                >
+                  Register
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-[#ff8c00] border border-[#ff8c00] hover:bg-transparent text-white hover:text-[#ff8c00] font-semibold px-4 py-2 rounded-full inline-block"
+                >
+                  Login
+                </Link>
+              </div>
+            </nav>
+          </div>
+        )}
 
         {/* Right section: Buttons (for desktop) */}
-        <div className="hidden lg:flex items-center space-x-4 relative">
+        <div className="hidden sm:flex items-center space-x-4 relative">
           <Link
             href="/register"
             className="border  text-white hover:text-[#ff8c00] font-semibold px-4 py-2 rounded-full inline-block"
@@ -283,7 +233,6 @@ const Header = ({ itemCount }: counter) => {
           )}
         </div>
       </div>
- 
     </header>
   );
 };
