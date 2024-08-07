@@ -1,9 +1,12 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CiShoppingCart } from "react-icons/ci";
 import { ToastContainer } from "react-toastify";
 import { MdClose, MdMenu } from "react-icons/md";
+import Script from "next/script";
 
 interface counter {
   itemCount: number;
@@ -21,14 +24,23 @@ const Header = ({ itemCount }: counter) => {
 
   return (
     <header className=" relative bg-gray-900 sticky top-0 z-50">
+      <Script
+        src="https://checkout.flutterwave.com/v3.js"
+        strategy="beforeInteractive"
+      />
       <div className="container mx-auto flex justify-between items-center py-4">
         {/* Left section: Logo */}
-        <Link
-          className="flex items-center text-[#ff8c00] font-bold text-2xl"
-          href="/"
-        >
-          <h1>H.Empire</h1>
-        </Link>
+        <div className="relative group cart-wrapper">
+          <Link href="/">
+            <Image
+              src="/assets/images/logo.png"
+              alt="Cart"
+              width={500}
+              height={500}
+              className="h-8 w-8  border-2 rounded-full border-gray-800  p-[1px] group-hover:scale-120"
+            />
+          </Link>
+        </div>
 
         {/* Hamburger menu (for mobile) */}
         <div className="flex p-2 space-x-2 items-center sm:hidden">
@@ -69,7 +81,7 @@ const Header = ({ itemCount }: counter) => {
         </div>
 
         {menuOpen && (
-          <div className=" sm:hidden   absolute bg-white  h-screen top-16 left-0 right-0  w-full text-gray-900">
+          <div className=" sm:hidden   absolute bg-white  h-screen top-20  left-0 right-0  w-full text-gray-900">
             <nav className="flex flex-col   space-y-8 items-center gap-4 py-4">
               <Link
                 href="/men"
