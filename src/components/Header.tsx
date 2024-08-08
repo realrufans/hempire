@@ -51,9 +51,9 @@ const Header = ({ itemCount }: counter) => {
                 alt="Cart"
                 width={24}
                 height={24}
-                className="h-8 w-8 group-hover:scale-120"
+                className="h-7 w-7 group-hover:scale-120"
               />
-              <p className="absolute  left-2 -top-5 text-[#ff8c00] font-extrabold z-50">
+              <p className="absolute  text-sm left-2 -top-4 text-[#ff8c00] font-extrabold z-50">
                 {itemCount}
               </p>
             </Link>
@@ -65,7 +65,7 @@ const Header = ({ itemCount }: counter) => {
             className="text-white focus:outline-none"
           >
             <svg
-              className="w-8 h-8"
+              className="w-7 h-7"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

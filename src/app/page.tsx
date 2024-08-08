@@ -94,7 +94,7 @@ export default function Home() {
 
         // Alternatively, if you want to update count based on the total items, uncomment the next line
         // newCount = cartItemsCount + 1;
-        toast.success("Cart updated!");
+        toast.info("Cart updated!");
       } else {
         // Product doesn't exist in the cart, add to cart
         newCartItems = [...cartItems, cartProduct];
@@ -109,17 +109,7 @@ export default function Home() {
     [cartItems, cartItemsCount, updateLocalStorage]
   );
 
-  const removeItemFromCart = useCallback(
-    (product: ProductType) => {
-      const newCartItems = cartItems.filter((item) => item._id !== product._id);
-      const newCount = cartItemsCount - 1;
-
-      setCartItems(newCartItems);
-      setCartItemsCount(newCount);
-      updateLocalStorage(newCount, newCartItems);
-    },
-    [cartItems, cartItemsCount, updateLocalStorage]
-  );
+ 
 
   return (
     <div>

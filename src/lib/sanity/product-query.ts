@@ -30,8 +30,11 @@ export async function getUnder100kProducts() {
       cover_image,
       images,
       tags,
- "slug": slug.current,
-      category
+     "slug": slug.current,
+     "category": category->{
+        _id,
+        name,
+      }
     }`
   );
 }

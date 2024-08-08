@@ -12,7 +12,9 @@ export type ProductType = {
     imageUrl: string;
   }[];
   slug: string;
-  category: string;
+  category: {
+    name: string;
+  };
   description: string;
   price: number;
   original_price: number;
