@@ -77,6 +77,7 @@ export default function CartPage() {
     fetchTxRef();
   }, []);
 
+  console.log(txRef)
   useEffect(() => {
     const localStorageCartItem =
       typeof window !== "undefined" && localStorage.getItem("hempire_cart");
