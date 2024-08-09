@@ -7,7 +7,11 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { ProductType } from "@/lib/sanity/types";
 import { urlFor } from "@/lib/sanity/urlBulder";
-import { Roboto } from "next/font/google";
+import { Poppins, Roboto } from "next/font/google";
+import Link from "next/link";
+import { formatBalance } from "@/lib/numberShortener";
+import { currencyFormater } from "@/lib/currencyFormater";
+import { MdCheck } from "react-icons/md";
 
 type addCartItem = (arg: ProductType) => void;
 
@@ -16,22 +20,22 @@ interface props {
   addCartItem: addCartItem;
 }
 
-const roboto = Roboto({
+const roboto = Poppins({
   weight: ["400", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
-
 const LatestProducts = ({ products, addCartItem }: props) => {
+  console.log(products[0]);
   return (
-    <section id="latest-products" className="py-10 bg-gray-100">
+    <section id="latest-products" className=" pt-10 bg-gray-100">
       <div className="container mx-auto px-4">
         <h2
-          className={`text-xl relative  font-bold mb-8 text-[#ff8c00] uppercase   ${roboto.className}`}
+          className={`text-xl relative  font-bold mb-8 text-[#ff8c00] uppercase  `}
         >
           Latest products
-          <span className="border-b-4 absolute left-0 right-0 pb-2 h-2 w-[5%] max-md:w-[30%] flex "></span>
+          <span className=" absolute left-0 right-0 pb-2 h-2 w-[5%] max-md:w-[30%] flex "></span>
         </h2>
         <Swiper
           navigation
@@ -52,46 +56,53 @@ const LatestProducts = ({ products, addCartItem }: props) => {
           }}
         >
           {products.map((product, index) => (
-            <SwiperSlide
-              key={product._id}
-              className="border-b-2 border-gray-200"
-            >
-              <div className="bg-white p-3 flex flex-col rounded-sm   shadow-lg">
-                <div className="relative hover:blur-sm w-full h-64 mb-4 rounded-sm overflow-hidden">
+            <SwiperSlide key={product._id} className=" border-gray-200 group">
+              <div
+                className={`  p-3 flex flex-col rounded-sm   ${roboto.className} `}
+              >
+                <div className="relative hover:blur-sm w-full h-64 mb-2 rounded-sm overflow-hidden">
                   <Image
                     src={urlFor(product.cover_image.asset._ref).url()}
                     alt={product.cover_image.alt}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-sm"
+                    className="rounded-sm group-hover:rotate-1 group-hover:scale-95"
                   />
+    
                 </div>
 
-                <div className="">
-                  <a
+                <div className="space-y-1">
+                  <p
+                    className={`text-xs line-clamp-1 uppercase text-gray-950  `}
+                  >
+                    {product.category.name}
+                  </p>
+                  <Link
                     href="#"
-                    className="text-lg line-clamp-1 font-semibold text-gray-800 mb-2"
+                    className="text-md font-medium line-clamp-1  capitalize  text-gray-800 "
                   >
                     {product.name}
-                  </a>
-                  <p className="my-2 max-sm:text-sm line-clamp-1 text-gray-950">
-                    {product.description}
-                  </p>
-                  <div className="flex items-center mb-4">
-                    <span className="text-lg font-bold text-gray-800">
-                      ₦{product.price}
+                  </Link>
+
+                  <div className="flex  max-md:space-y-1  sm:items-center  max-sm:flex-col ">
+                    <span className="text-xs font-semibold text-gray-700">
+                      ₦{currencyFormater(product.price.toString())}
                     </span>
-                    <span className="text-sm line-through text-gray-800 ml-2">
-                      ₦{product.original_price && product.original_price}
+
+                    <span className="text-xs line-through text-gray-600  sm:ml-2">
+                      ₦
+                      {product.original_price &&
+                        currencyFormater(product.original_price.toString())}
                     </span>
                   </div>
-                  <button
-                    onClick={() => addCartItem(product)}
-                    className="bg-[#ff8c00] border hover:text-[#ff8c00] border-transparent hover:bg-transparent hover:border-[#ff8c00] text-white hover:bg-[#ff8c00] font-semibold py-2 px-4 rounded-sm"
-                  >
-                    Add to Cart
-                  </button>
                 </div>
+
+                <button
+                  onClick={() => addCartItem(product)}
+                  className="bg-[#ff8c00]      hover:bg-[#ff9c00] hover:border-[#ff8c00] text-white   font-semibold py-2  px-4 rounded-sm w-full  my-2"
+                >
+                  Add to Cart
+                </button>
               </div>
             </SwiperSlide>
           ))}

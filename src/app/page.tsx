@@ -19,6 +19,7 @@ import "react-toastify/ReactToastify.min.css";
 
 import { CartProductType, CategoryType, ProductType } from "@/lib/sanity/types";
 import { useEffect, useState, useCallback } from "react";
+import Reviews from "@/components/Reviews";
 
 export default function Home() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -90,7 +91,7 @@ export default function Home() {
         // Product already exists in the cart, update quantity
         newCartItems = [...cartItems];
         newCartItems[existingProductIndex].quantity += 1;
-              newCount = cartItemsCount + 1;
+        newCount = cartItemsCount + 1;
 
         // Alternatively, if you want to update count based on the total items, uncomment the next line
         // newCount = cartItemsCount + 1;
@@ -109,16 +110,15 @@ export default function Home() {
     [cartItems, cartItemsCount, updateLocalStorage]
   );
 
- 
-
   return (
-    <div>
+    <div className="bg-gray-100">
       <ToastContainer />
       <Header itemCount={cartItemsCount} />
       <DemoSlider />
       <LatestProducts addCartItem={addCartItem} products={products} />
       <ProductsCategory categories={categories} />
       <Under100K addCartItem={addCartItem} under100k={under100k} />
+      <Reviews />
       <Footer />
     </div>
   );

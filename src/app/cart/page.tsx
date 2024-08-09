@@ -114,6 +114,8 @@ export default function CartPage() {
     updateLocalStorage(count, filteredItems);
   };
 
+  console.log(txRef)
+
   const updateLocalStorage = useCallback(
     (count: number, cart: ProductType[]) => {
       if (typeof window !== "undefined") {
@@ -182,7 +184,7 @@ export default function CartPage() {
       },
     });
   }
-
+ alert(txRef)
   return (
     <div className="flex flex-col min-h-screen   bg-white text-gray-900 ">
       <Header itemCount={cartItemsCount} />

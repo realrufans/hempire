@@ -21,57 +21,6 @@ interface Wig {
 }
 
 export default function Under100kPage() {
-  const wigs: Wig[] = [
-    {
-      id: 1,
-      image: "/placeholder.svg",
-      title: "Luxurious Lace Front Wig",
-      price: 85000,
-      category: "Lace Front",
-      hairType: "Straight",
-    },
-    {
-      id: 2,
-      image: "/placeholder.svg",
-      title: "Bouncy Curly Wig",
-      price: 65000,
-      category: "Curly",
-      hairType: "Curly",
-    },
-    {
-      id: 3,
-      image: "/placeholder.svg",
-      title: "Sleek Bob Wig",
-      price: 75000,
-      category: "Bob",
-      hairType: "Straight",
-    },
-    {
-      id: 4,
-      image: "/placeholder.svg",
-      title: "Voluminous Wavy Wig",
-      price: 90000,
-      category: "Wavy",
-      hairType: "Wavy",
-    },
-    {
-      id: 5,
-      image: "/placeholder.svg",
-      title: "Elegant Long Wig",
-      price: 95000,
-      category: "Long",
-      hairType: "Straight",
-    },
-    {
-      id: 6,
-      image: "/placeholder.svg",
-      title: "Chic Pixie Cut Wig",
-      price: 55000,
-      category: "Short",
-      hairType: "Straight",
-    },
-  ];
-
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
   const [under100k, setUnder100k] = useState<ProductType[]>([]);

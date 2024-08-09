@@ -14,7 +14,10 @@ export async function getProducts() {
       images,
       tags,
     "slug": slug.current,
-      category
+       "category": category->{
+        _id,
+        name,
+      }
     }`
   );
 }
