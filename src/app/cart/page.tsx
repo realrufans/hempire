@@ -77,7 +77,7 @@ export default function CartPage() {
     fetchTxRef();
   }, []);
 
-  console.log(txRef)
+  console.log(txRef);
   useEffect(() => {
     const localStorageCartItem =
       typeof window !== "undefined" && localStorage.getItem("hempire_cart");
@@ -115,7 +115,7 @@ export default function CartPage() {
     updateLocalStorage(count, filteredItems);
   };
 
-  console.log(txRef)
+  console.log(txRef);
 
   const updateLocalStorage = useCallback(
     (count: number, cart: ProductType[]) => {
@@ -185,10 +185,12 @@ export default function CartPage() {
       },
     });
   }
- alert(txRef)
+
   return (
     <div className="flex flex-col min-h-screen   bg-white text-gray-900 ">
       <Header itemCount={cartItemsCount} />
+
+      <div className="bg-white text-black">{txRef}</div>
 
       {!paid && !orderForm && (
         <main className="flex-1 bg-background  px-2 lg:max-w-4xl lg:mx-auto w-full  py-8 md:px-6 md:py-12">
