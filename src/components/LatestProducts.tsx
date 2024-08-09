@@ -7,7 +7,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { ProductType } from "@/lib/sanity/types";
 import { urlFor } from "@/lib/sanity/urlBulder";
-import { Poppins, Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { formatBalance } from "@/lib/numberShortener";
 import { currencyFormater } from "@/lib/currencyFormater";

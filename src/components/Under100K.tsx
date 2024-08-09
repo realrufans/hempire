@@ -8,7 +8,6 @@ import { urlFor } from "@/lib/sanity/urlBulder";
 import { currencyFormater } from "@/lib/currencyFormater";
 import { formatBalance } from "@/lib/numberShortener";
 import Head from "next/head";
-import { Grey_Qo, Platypi } from "next/font/google";
 
 type addCartItem = (arg: ProductType) => void;
 
@@ -21,11 +20,7 @@ interface props {
   addCartItem: addCartItem;
   showmore?: boolean;
 }
-const lato = Platypi({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
+ 
 const Under100K = ({ addCartItem, under100k, showmore = true }: props) => {
   const [viewMore, setViewMore] = useState(false);
   return (
